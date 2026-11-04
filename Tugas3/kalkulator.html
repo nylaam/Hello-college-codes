@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Kalkulator</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <style>
+      body {
+        font-family: sans-serif;
+        margin: 30px;
+      }
+
+      .calculator {
+        width: 200px;
+        border: 1px solid #000;
+        padding: 10px;
+      }
+
+      .identity {
+        margin-bottom: 10px;
+        font-size: 14px;
+      }
+
+      #display {
+        width: 93%;
+        height: 30px;
+        text-align: right;
+        margin-bottom: 10px;
+        font-size: 16px;
+      }
+
+      .row {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 5px;
+      }
+
+      .left-panel {
+        width: 70%;
+      }
+
+      .right-panel {
+        width: 25%;
+      }
+
+      .grid-num {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 5px;
+      }
+
+      .grid-op {
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+      }
+
+      button {
+        padding: 8px;
+        font-size: 14px;
+        cursor: pointer;
+      }
+
+      .btn-zero {
+        width: 100%;
+        margin-top: 5px;
+      }
+
+      .btn-equal {
+        width: 100%;
+        margin-top: 5px;
+        padding: 8px;
+      }
+
+      .btn-clear {
+        width: 100%;
+        margin-bottom: 5px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="identity">
+      NIM: 255150707111065<br />
+      Nama: Nayla Nur Amalia
+    </div>
+    <div class="calculator">
+      <input type="text" id="display" readonly />
+
+      <button class="btn-clear" id="clear">C</button>
+
+      <div class="row">
+        <div class="left-panel">
+          <div class="grid-num">
+            <button class="btn-val" data-val="1">1</button>
+            <button class="btn-val" data-val="2">2</button>
+            <button class="btn-val" data-val="3">3</button>
+            <button class="btn-val" data-val="4">4</button>
+            <button class="btn-val" data-val="5">5</button>
+            <button class="btn-val" data-val="6">6</button>
+            <button class="btn-val" data-val="7">7</button>
+            <button class="btn-val" data-val="8">8</button>
+            <button class="btn-val" data-val="9">9</button>
+          </div>
+          <button class="btn-val btn-zero" data-val="0">0</button>
+        </div>
+
+        <!-- Operasi Artimetika -->
+        <div class="right-panel">
+          <div class="grid-op">
+            <button class="btn-val" data-val="+">+</button>
+            <button class="btn-val" data-val="-">-</button>
+            <button class="btn-val" data-val="*">*</button>
+            <button class="btn-val" data-val="/">/</button>
+          </div>
+        </div>
+      </div>
+
+      <button id="equal" class="btn-equal">=</button>
+    </div>
+
+    <script>
+      $(document).ready(function () {
+        let display = $("#display");
+
+        $(".btn-val").click(function () {
+          let val = $(this).data("val");
+          display.val(display.val() + val);
+        });
+
+        $("#equal").click(function () {
+          try {
+            display.val(eval(display.val()));
+          } catch (e) {
+            display.val("Error");
+          }
+        });
+
+        $("#clear").click(function () {
+          display.val("");
+        });
+      });
+    </script>
+  </body>
+</html>
