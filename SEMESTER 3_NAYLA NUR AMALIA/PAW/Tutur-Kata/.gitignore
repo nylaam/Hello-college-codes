@@ -1,0 +1,6 @@
+node_modules/
+kosakata.db
+kosakata.db-shm
+kosakata.db-wal
+.env
+.DS_Store
