@@ -1,0 +1,158 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#2f3cf0" />
+    <meta
+      name="description"
+      content="Tutur Kata: catatan kosakata dengan flashcard dan kuis untuk mengulang kata yang belum hafal."
+    />
+    <title>Tutur Kata</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+    <script src="js/api.js" defer></script>
+    <script src="js/app.js" defer></script>
+  </head>
+  <body>
+    <header class="hero">
+      <div class="wrap">
+        <div class="hero-top">
+          <a class="brand" href="#top">tutur kata</a>
+          <nav class="tab" aria-label="Menu utama">
+            <button type="button" data-view="belajar" aria-current="page">
+              Belajar
+            </button>
+            <button type="button" data-view="daftar">Koleksi</button>
+          </nav>
+        </div>
+        <h1 class="hero-title">
+          <span>Kata apa yang</span> <span>mau kamu ingat</span>
+          <span>hari ini?</span>
+        </h1>
+        <section id="statistik" class="statistik" aria-live="polite"></section>
+      </div>
+    </header>
+
+    <main class="wrap" id="top">
+      <section id="view-belajar" class="view-section">
+        <h2 class="judul">Mulai sesi</h2>
+        <form id="form-sesi" class="control-panel">
+          <label
+            ><span>Mode</span
+            ><select id="mode">
+              <option value="flashcard">Flashcard</option>
+              <option value="kuis">Kuis pilihan ganda</option>
+            </select></label
+          >
+          <label
+            ><span>Bahasa</span
+            ><select id="sesi-bahasa">
+              <option value="">Semua bahasa</option>
+            </select></label
+          >
+          <label
+            ><span>Jumlah kata</span
+            ><select id="jumlah">
+              <option>5</option>
+              <option selected>10</option>
+              <option>20</option>
+            </select></label
+          >
+          <button type="submit" class="utama">Mulai</button>
+        </form>
+        <div id="panggung" class="panggung">
+          <p class="kosong">
+            Pilih mode lalu tekan Mulai. Kata yang belum hafal akan muncul lebih
+            sering ya!
+          </p>
+        </div>
+      </section>
+
+      <section id="view-daftar" class="view-section" hidden>
+        <h2 class="judul">Semua kata</h2>
+        <div class="control-panel library-controls">
+          <label class="search-field"
+            ><span>Cari</span
+            ><input type="search" id="cari" placeholder="Kata atau artinya"
+          /></label>
+          <label
+            ><span>Bahasa</span
+            ><select id="filter-bahasa">
+              <option value="">Semua bahasa</option>
+            </select></label
+          >
+          <label
+            ><span>Tingkat hafal</span
+            ><select id="filter-tingkat">
+              <option value="">Semua tingkat</option>
+              <option>1</option>
+              <option>2</option>
+              <option>3</option>
+              <option>4</option>
+              <option>5</option>
+            </select></label
+          >
+          <button type="button" id="tambah" class="utama">Tambah kata</button>
+        </div>
+        <ul id="daftar" class="daftar"></ul>
+      </section>
+    </main>
+
+    <dialog id="dialog">
+      <form id="form-kata" method="dialog">
+        <div class="dialog-heading">
+          <h2 id="judul-dialog">Tambah kata</h2>
+          <button
+            type="button"
+            id="batal"
+            class="icon-close"
+            aria-label="Tutup"
+          >
+            ×
+          </button>
+        </div>
+        <label
+          >Kata<input name="kata" required maxlength="100" autocomplete="off"
+        /></label>
+        <label
+          >Arti<input name="arti" required maxlength="200" autocomplete="off"
+        /></label>
+        <div class="baris">
+          <label
+            >Bahasa<input
+              name="bahasa"
+              list="saran-bahasa"
+              maxlength="40"
+              value="Inggris"
+              autocomplete="off" /></label
+          ><label
+            >Tingkat hafal<select name="tingkat_hafal">
+              <option>1</option>
+              <option>2</option>
+              <option>3</option>
+              <option>4</option>
+              <option>5</option>
+            </select></label
+          >
+        </div>
+        <label
+          >Contoh kalimat <span class="optional">(boleh dikosongkan)</span
+          ><textarea name="contoh_kalimat" rows="3" maxlength="500"></textarea>
+        </label>
+        <datalist id="saran-bahasa"></datalist>
+        <p id="galat" class="galat" role="alert" hidden></p>
+        <div class="aksi">
+          <button type="button" id="batal-sekunder">Batal</button
+          ><button type="submit" class="utama">Simpan</button>
+        </div>
+      </form>
+    </dialog>
+    <div id="toast" class="toast" role="status" aria-live="polite"></div>
+  </body>
+</html>
